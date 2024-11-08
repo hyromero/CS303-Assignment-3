@@ -1,24 +1,29 @@
-// Queue.h
+// Hiram Romero
+// CS303 Assignment 3
+
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include <iostream>
-#include <stdexcept> // for out_of_range exception
-
+#include <iostream>  // For standard input/output
+#include <stdexcept> // For out_of_range exception when accessing elements from the queue
+#include <vector>    // For using vectors, which are required for some of the operations
 using namespace std;
 
+// Template class for the Queue data structure
 template <typename T>
 class Queue {
 private:
+    // Definition of the Node structure that holds the data and the pointer to the next node
     struct Node {
-        T data;
-        Node* next;
-        Node(T value) : data(value), next(nullptr) {}
+        T data;        // Data held by the node (of type T, which can be any data type)
+        Node* next;    // Pointer to the next node in the queue
+        Node(T value)  // Constructor to initialize a node with a given value
+                : data(value), next(nullptr) {}
     };
 
-    Node* frontNode; // Points to the front of the queue
-    Node* rearNode;  // Points to the rear of the queue
-    int queueSize;   // Keeps track of the queue size
+    Node* frontNode;  // Points to the front of the queue
+    Node* rearNode;   // Points to the rear of the queue
+    int queueSize;    // Keeps track of the queue size
 
 public:
     // Constructor
@@ -47,6 +52,12 @@ public:
 
     // Function to display all the elements in the queue
     void display();
+
+    // Function to perform a recursive linear search for the last occurrence of a target
+    int linear_search_last(const vector<T>& items, const T& target, size_t pos_first = 0);
+
+    // Function to perform insertion sort on the queue
+    void insertion_sort();
 };
 
 #endif // QUEUE_H
