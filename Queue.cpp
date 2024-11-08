@@ -1,13 +1,13 @@
 // Hiram Romero
 // CS303 Assignment 3
 
-#include "Queue.h"  // Include the custom header file that defines the Queue class
+#include "Queue.h"  // Includes header file
 
-// Constructor: Initializes the queue with an empty state
+// Constructor for Initializing the queue
 template <typename T>
 Queue<T>::Queue() : frontNode(nullptr), rearNode(nullptr), queueSize(0) {}
 
-// Destructor: Cleans up dynamically allocated memory by popping all elements from the queue
+// Destructor:
 template <typename T>
 Queue<T>::~Queue() {
     while (!empty()) {  // While the queue is not empty
@@ -15,10 +15,10 @@ Queue<T>::~Queue() {
     }
 }
 
-// push(): Adds a new element to the back of the queue
+// push(): Function that adds a new element to the back of the queuee
 template <typename T>
 void Queue<T>::push(T value) {
-    Node* newNode = new Node(value);  // Create a new node with the given value
+    Node* newNode = new Node(value);  // where we create a new node with the given value
     if (rearNode == nullptr) {  // If the queue is empty (no rear node)
         frontNode = rearNode = newNode;  // The front and rear nodes both point to the new node
     } else {
@@ -28,23 +28,23 @@ void Queue<T>::push(T value) {
     queueSize++;  // Increment the size of the queue
 }
 
-// pop(): Removes the front element from the queue
+// pop(): The Function that Removes the front element from the queue
 template <typename T>
 void Queue<T>::pop() {
     if (empty()) {  // If the queue is empty
-        cout << "Queue is empty, cannot pop." << endl;  // Print an error message
+        cout << "Queue is empty, cannot pop." << endl;  // Prints the error message
         return;
     }
-    Node* temp = frontNode;  // Temporarily store the current front node
-    frontNode = frontNode->next;  // Update the front node to the next node
-    delete temp;  // Delete the old front node
+    Node* temp = frontNode;  // Temporarily stores the current front node
+    frontNode = frontNode->next;  // Updates the front node to the next node
+    delete temp;  // Deletes the old front node
     if (frontNode == nullptr) {  // If the queue is now empty (no front node)
         rearNode = nullptr;  // Set the rear node to nullptr as well
     }
     queueSize--;  // Decrement the size of the queue
 }
 
-// front(): Returns the front element of the queue
+// front(): function that returns the front element of the queue
 template <typename T>
 T Queue<T>::front() {
     if (!empty()) {  // If the queue is not empty
@@ -53,23 +53,23 @@ T Queue<T>::front() {
     throw out_of_range("Queue is empty");  // Throw an exception if the queue is empty
 }
 
-// size(): Returns the current number of elements in the queue
+// size(): function that returns the current number of elements in the queue
 template <typename T>
 int Queue<T>::size() {
     return queueSize;  // Return the queue size
 }
 
-// empty(): Checks if the queue is empty
+// empty(): function that checks if the queue is empty
 template <typename T>
 bool Queue<T>::empty() {
     return frontNode == nullptr;  // If the front node is nullptr, the queue is empty
 }
 
-// move_to_rear(): Moves the front element to the rear of the queue
+// move_to_rear(): fucntion that moves the front element to the rear of the queue
 template <typename T>
 void Queue<T>::move_to_rear() {
-    if (empty() || frontNode == rearNode) {  // If the queue is empty or has only one element
-        return;  // No operation needed
+    if (empty() || frontNode == rearNode) {  // if the queue is empty or has only one element
+        return;
     }
 
     T frontValue = front();  // Get the value of the front element
@@ -77,7 +77,7 @@ void Queue<T>::move_to_rear() {
     push(frontValue);  // Push it to the rear of the queue
 }
 
-// display(): Prints all the elements in the queue
+// display(): function that prints all the elements in the queue
 template <typename T>
 void Queue<T>::display() {
     if (empty()) {  // If the queue is empty
@@ -86,17 +86,17 @@ void Queue<T>::display() {
     }
 
     Node* current = frontNode;  // Start from the front of the queue
-    while (current != nullptr) {  // Traverse through the entire queue
+    while (current != nullptr) {  // go through the entire queue
         cout << current->data << " ";  // Print the data of each node
         current = current->next;  // Move to the next node in the queue
     }
-    cout << endl;  // Print a newline after displaying all elements
+    cout << endl;
 }
 
-// Recursive Linear Search to find the last occurrence of a target
+// The Recursive Linear Search portion of the code that finds the last occurrence of a target
 template <typename T>
 int Queue<T>::linear_search_last(const vector<T>& items, const T& target, size_t pos_first) {
-    // Base case: if we reached the end of the vector, return -1 (not found)
+    // Base case: if we reached the end of the vector, return -1  which means its not found
     if (pos_first == items.size()) {
         return -1;
     }
@@ -109,22 +109,22 @@ int Queue<T>::linear_search_last(const vector<T>& items, const T& target, size_t
         return pos_first;
     }
 
-    return result;  // If no match was found, return the previous result
+    return result;  // If no match was found, it returns the previous result
 }
 
-// Insertion Sort for the queue (works with linked list structure)
+// Insertion Sort  portion for the queue - Used a linked list for this
 template <typename T>
 void Queue<T>::insertion_sort() {
     if (empty()) return;  // If the queue is empty, no need to sort
 
-    // Create a vector to hold the queue elements
+    // Creates a vector to hold the queue elements
     vector<T> elements;
     while (!empty()) {  // While the queue is not empty
         elements.push_back(front());  // Push the front element to the vector
         pop();  // Pop the front element from the queue
     }
 
-    // Perform insertion sort on the vector
+    // Performs insertion sort on the vector
     int n = elements.size();  // Get the size of the vector
     for (int j = 1; j < n; ++j) {  // Start from the second element
         T key = elements[j];  // Store the current element (key)
@@ -142,8 +142,5 @@ void Queue<T>::insertion_sort() {
     }
 }
 
-// Explicit template instantiation for common types
-template class Queue<int>;  // Explicitly instantiate the template for integer type (int)
-// You can add other template instantiations here if needed, for example:
-// template class Queue<double>;   // For double type
-// template class Queue<string>;   // For string type
+
+template class Queue<int>;

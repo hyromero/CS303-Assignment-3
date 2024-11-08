@@ -4,7 +4,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include <iostream>  // For standard input/output
+#include <iostream>  // for input/output
 #include <stdexcept> // For out_of_range exception when accessing elements from the queue
 #include <vector>    // For using vectors, which are required for some of the operations
 using namespace std;
@@ -60,4 +60,4 @@ public:
     void insertion_sort();
 };
 
-#endif // QUEUE_H
+#endif
